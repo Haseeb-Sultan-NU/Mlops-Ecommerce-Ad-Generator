@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ad-creative-api
+spec:
+  replicas: 1  # How many copies of the API to run
+  selector:
+    matchLabels:
+      app: ad-creative-api
+  template:
+    metadata:
+      labels:
+        app: ad-creative-api
+    spec:
+      containers:
+      - name: ad-creative-api
+        # REPLACE 'your-docker-username' with your actual Docker Hub username
+        image: haseebsultan0874/ad-creative-api:latest
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ad-creative-api-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: ad-creative-api
+  ports:
+  - protocol: TCP
+    port: 80        # The port the internet will hit
+    targetPort: 8000 # The port your Python app is listening on
