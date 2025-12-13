@@ -1,4 +1,20 @@
+# Python
 venv/
 __pycache__/
-.DS_Store
+*.pyc
+*.ipynb
+
+# Environment variables
 .env
+
+# Data & Models (Too large for GitHub)
+data/
+model_output/
+mlruns/
+mlflow.db
+mlflow_local.db
+logs/
+
+# IDE settings
+.vscode/
+.idea/

@@ -1,0 +1,9 @@
+apache-airflow-providers-cncf-kubernetes
+apache-airflow-providers-microsoft-azure
+pandas
+scikit-learn
+mlflow
+transformers
+torch
+fastapi
+uvicorn
