@@ -17,6 +17,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # ---------------------------------------------------------
+      # NEW STEP: Download the model files from Azure Storage
+      # This puts the files into 'model_output' so Docker can COPY them
+      # ---------------------------------------------------------
+      - name: Download Model from Azure
+        env:
+          # Ensure this Secret name matches exactly what is in your GitHub Settings
+          CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+        run: |
+          mkdir -p model_output
+          az storage blob download-batch \
+            --destination model_output \
+            --source models \
+            --connection-string "$CONNECTION_STRING"
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
