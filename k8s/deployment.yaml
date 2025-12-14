@@ -35,9 +35,10 @@ spec:
   selector:
     app: ad-creative-api
   ports:
-  - protocol: TCP
-    port: 80        # The port the internet will hit
-    targetPort: 8000 # The port your Python app is listening on
+  - name: web             
+    protocol: TCP
+    port: 80
+    targetPort: 8000
 
 ---
 apiVersion: autoscaling/v1

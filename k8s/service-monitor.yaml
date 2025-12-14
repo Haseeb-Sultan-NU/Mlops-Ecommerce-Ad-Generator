@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: ad-creative-monitor
+  labels:
+    # This label is CRITICAL. It tells the Prometheus Operator (installed via Helm) 
+    # that this monitor belongs to it.
+    release: monitoring
+spec:
+  selector:
+    matchLabels:
+      # This must match the label in your Service
+      app: ad-creative-api
+  endpoints:
+  - port: web        # Refers to the 'name: web' we added in Step 1
+    path: /metrics   # The path where your Python app exposes data
+    interval: 15s    # How often to scrape
