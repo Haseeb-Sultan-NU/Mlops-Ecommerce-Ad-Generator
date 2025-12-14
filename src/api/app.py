@@ -4,9 +4,10 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 import time
 import os
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="Ad Creative Generator API", version="1.0")
-
+Instrumentator().instrument(app).expose(app)
 # Load Model from local artifacts
 MODEL_DIR = "model_output"
 print(f"Loading model from {MODEL_DIR}...")
