@@ -39,6 +39,7 @@ spec:
     port: 80        # The port the internet will hit
     targetPort: 8000 # The port your Python app is listening on
 
+---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
