@@ -78,6 +78,10 @@ Error Rate: Percentage of 5xx errors.
 
 Saturation: CPU and Memory usage of pods.
 
+# architecture
+<img width="1283" height="831" alt="Architecture Diagram" src="https://github.com/user-attachments/assets/de6e969a-6d9b-4a13-b458-93d91a288147" />
+
+
 
 
 # Completed 14th Dec, 2025 6:48 PM GMT
