@@ -12,11 +12,6 @@ An end-to-end **MLOps pipeline** that automates e-commerce ad copy generation us
 
 ---
 
-## 🏗️ System Architecture
-
-![Architecture Diagram](https://github.com/user-attachments/assets/de6e969a-6d9b-4a13-b458-93d91a288147)
-
----
 
 ## ⚙️ Pipeline Stages
 
