@@ -1,89 +1,155 @@
-# Intelligent E-Commerce Ad Creative Generator 🚀
+# Intelligent E-Commerce Ad Creative Generator
 
-![Python](https://img.shields.io/badge/Python-3.9-blue)
-![Azure](https://img.shields.io/badge/Azure-AKS-0078D4)
-![Docker](https://img.shields.io/badge/Docker-Container-2496ED)
-![CI/CD](https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF)
-![Status](https://img.shields.io/badge/Status-Production%20Ready-success)
+![Python](https://img.shields.io/badge/Python-3.9-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Azure](https://img.shields.io/badge/Azure_AKS-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
+![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=for-the-badge&logo=mlflow&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Production_Ready-success?style=for-the-badge)
 
-## 📌 Project Overview
-This project is an end-to-end **MLOps Pipeline** designed to automate the creation of e-commerce advertisement copy. It uses a Generative AI model (fine-tuned LLM) to produce marketing text based on product descriptions.
-
-The system is built with a "Production-First" mindset, featuring automated data ingestion, model versioning, containerized deployment on **Azure Kubernetes Service (AKS)**, and real-time observability.
+An end-to-end **MLOps pipeline** that automates e-commerce ad copy generation using a fine-tuned Generative AI model — built with a production-first mindset featuring automated data ingestion, model versioning, containerized deployment on **Azure Kubernetes Service**, and real-time observability.
 
 ---
 
 ## 🏗️ System Architecture
 
-The pipeline consists of the following key stages:
+![Architecture Diagram](https://github.com/user-attachments/assets/de6e969a-6d9b-4a13-b458-93d91a288147)
 
-1.  **Data Ingestion & Orchestration:** **Apache Airflow** schedules the fetching of product data and triggers model retraining workflows.
-2.  **Model Training & Tracking:** **MLflow** tracks experiments, logs metrics, and manages model versions (Model Registry).
-3.  **CI/CD Pipeline:** **GitHub Actions** automatically:
-    * Lints and tests the code.
-    * Builds and pushes Docker images to Docker Hub.
-    * Deploys the latest image to the Azure Kubernetes Service (AKS).
-4.  **Deployment:** The API is served via **FastAPI** on a Kubernetes cluster with **Horizontal Pod Autoscaling (HPA)** enabled.
-5.  **Monitoring:** **Prometheus** scrapes metrics from the pods, and **Grafana** visualizes traffic, latency, and error rates with active alerting.
+---
+
+## ⚙️ Pipeline Stages
+
+```
+Product Data Source
+      │
+      ▼
+Apache Airflow
+(Scheduled ingestion & retraining triggers)
+      │
+      ▼
+Model Training
+(Fine-tuned Transformer — ad copy generation)
+      │
+      ▼
+MLflow
+(Experiment tracking, metric logging, Model Registry)
+      │
+      ▼
+GitHub Actions CI/CD
+(Lint → Test → Docker Build → Push → Deploy)
+      │
+      ▼
+Azure AKS Deployment
+(FastAPI + Load Balancer + HPA)
+      │
+      ▼
+Prometheus + Grafana
+(Real-time metrics, dashboards, alerting)
+```
 
 ---
 
 ## 🚀 Key Features
 
-* **Generative AI Model:** Fine-tuned Transformer model for high-quality ad copy generation.
-* **Fully Automated CI/CD:** Zero-touch deployment from GitHub commit to live Production.
-* **Scalable Infrastructure:** Deployed on Azure AKS with a Load Balancer and HPA to handle traffic spikes.
-* **Observability:** Custom Grafana dashboards monitoring Request Rate, Latency, and System Health.
-* **Containerization:** Optimized Docker images ensuring consistency across environments.
+**Generative AI Model**
+Fine-tuned Transformer model producing high-quality, product-specific ad copy from raw product descriptions.
+
+**Fully Automated CI/CD**
+Zero-touch deployment — a GitHub commit triggers linting, testing, Docker image build and push, and live deployment to AKS automatically via GitHub Actions.
+
+**Scalable Kubernetes Infrastructure**
+Deployed on Azure AKS with a Load Balancer and Horizontal Pod Autoscaling (HPA) to handle traffic spikes without manual intervention.
+
+**Full-Stack Observability**
+Custom Grafana dashboards tracking throughput, latency, error rates, and pod resource saturation — with active Prometheus alerting.
+
+**Optimized Containerization**
+Docker images built for consistency across local, staging, and production environments.
 
 ---
 
-## 🛠️ Installation & Setup
+## 📊 Monitored Metrics
+
+| Metric | Description |
+|:---|:---|
+| **Throughput** | Requests per second (RPS) |
+| **Latency** | Average inference response time |
+| **Error Rate** | Percentage of 5xx responses |
+| **Saturation** | Pod CPU and memory utilization |
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Tools |
+|-------|-------|
+| **Orchestration** | Apache Airflow |
+| **Model Tracking** | MLflow (experiments, registry) |
+| **API** | FastAPI |
+| **Containerization** | Docker |
+| **Infrastructure** | Azure AKS, Kubernetes, HPA |
+| **CI/CD** | GitHub Actions |
+| **Monitoring** | Prometheus, Grafana |
+
+---
+
+## ⚙️ Setup & Deployment
 
 ### Prerequisites
-* Azure CLI
-* Kubectl
-* Docker
-* Python 3.9+
+- Python 3.9+
+- Docker
+- Azure CLI
+- kubectl
 
-# Build the image
+### Run Locally
+
+```bash
+git clone https://github.com/your-username/ad-creative-generator.git
+cd ad-creative-generator
+pip install -r requirements.txt
+
+# Build and run Docker container
 docker build -t ad-creative-api src/api/
-
-# Run the container
 docker run -p 8000:8000 ad-creative-api
+```
 
-Visit http://localhost:8000/docs to test the API locally.
+Visit `http://localhost:8000/docs` to test the API.
 
-# Apply deployments and services
+### Deploy to Kubernetes
+
+```bash
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
-
-# Enable Autoscaling
 kubectl apply -f k8s/hpa.yaml
+```
 
-📊 Monitoring & Observability
-The system uses the Prometheus Operator stack for full-stack monitoring.
+### Access Monitoring Dashboards
 
-Accessing Dashboards
-Grafana: Exposed on port 3000 (via port-forwarding).
+```bash
+# Grafana (port 3000)
+kubectl port-forward svc/grafana 3000:3000
 
-Prometheus: Scrapes metrics from the /metrics endpoint on the API.
+# Prometheus metrics endpoint
+GET /metrics
+```
 
-Key Metrics Tracked
-Throughput: Requests per second (RPS).
+---
 
-Latency: Average response time per inference.
+## 📂 Repository Structure
 
-Error Rate: Percentage of 5xx errors.
-
-Saturation: CPU and Memory usage of pods.
-
-# architecture
-<img width="1283" height="831" alt="Architecture Diagram" src="https://github.com/user-attachments/assets/de6e969a-6d9b-4a13-b458-93d91a288147" />
-
-
-
-
-# Completed 14th Dec, 2025 6:48 PM GMT
-# Haris Sultan 21-0461
-
+```
+ad-creative-generator/
+├── src/
+│   └── api/
+├── k8s/
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   └── hpa.yaml
+├── dags/
+├── mlflow/
+├── monitoring/
+├── .github/
+│   └── workflows/
+└── README.md
+```
